@@ -6,15 +6,13 @@ import './index.css'
 
 // Función para iniciar los mocks solo en desarrollo
 async function enableMocking() {
-  if (process.env.NODE_ENV !== 'development') {
-    return
-  }
-
   const { worker } = await import('./mocks/browser')
 
-  // Inicia el worker y espera a que esté listo
   return worker.start({
-    onUnhandledRequest: 'bypass', // Si hay una petición que no conocemos, déjala pasar
+    onUnhandledRequest: 'bypass',
+    serviceWorker: {
+      url: import.meta.env.BASE_URL + 'mockServiceWorker.js',
+    },
   })
 }
 
@@ -24,7 +22,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 enableMocking().then(() => {
   root.render(
     <React.StrictMode>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <App />
       </BrowserRouter>
     </React.StrictMode>
