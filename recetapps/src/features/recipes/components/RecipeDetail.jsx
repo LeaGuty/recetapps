@@ -24,8 +24,8 @@ const RecipeDetail = ({ recipe }) => {
                 <div className="bg-blue-600 p-8 text-white">
                     <h1 className="text-3xl font-bold mb-2">{recipe.title}</h1>
                     <div className="flex gap-4 text-blue-100 text-sm font-medium">
-                        <span>⏱ {recipe.time}</span>
-                        <span>📊 {recipe.difficulty}</span>
+                        <span>{recipe.time}</span>
+                        <span>{recipe.difficulty}</span>
                     </div>
                 </div>
 
